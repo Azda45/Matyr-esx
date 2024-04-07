@@ -1,0 +1,45 @@
+body {
+    background-color: transparent !important;
+}
+
+.template, .notification {
+    display: none;
+}
+
+.notif-container {
+    width: 20%;
+    position: absolute;
+    right: 15%;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+}
+
+.notification {
+    padding: 10px;
+    width: fit-content;
+    border-radius: 5px;
+    margin: 5px;
+    font: caption;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.success {
+    background: rgba(12, 180, 0, 0.512);
+    color: #fff;
+}
+
+.inform {
+    background-color: rgba(0, 137, 255, 0.512);
+    color: #ffffff;
+}
+
+.error {
+    background: rgb(255, 0, 0, 0.512);
+    color: #fff;
+}
+.warn {
+    background: rgba(218, 185, 0, 0.512);
+    color: #fff;
+}

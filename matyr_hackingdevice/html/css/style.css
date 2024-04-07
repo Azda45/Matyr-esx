@@ -1,0 +1,120 @@
+/* GLOBAL */
+
+.hidden {
+  display: none !important;
+}
+
+.proper {
+  border-image: linear-gradient(45deg, #ecc800, #564800) 1 !important;
+}
+.good {
+  background-color: #3cec54 !important;
+}
+.bad {
+  background-color: #F00F18 !important;
+}
+
+/* SCRAMBLER */
+
+.scrambler {
+  margin: 0 auto 20px;
+  width: 540px;
+  min-width: 540px;
+  max-width: 540px;
+  background-color: #232832;
+  padding: 30px 0;
+  display: none;
+}
+.scrambler-splash{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 16px;
+}
+.scrambler-splash .scrambler-hacker{
+  font-size: 65px;
+  margin-bottom: 30px;
+}
+.scrambler-splash .scrambler-text{
+  font-weight: bold;
+}
+.scrambler .scrambler-find{
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  user-select: none;
+  margin-top: 10px;
+}
+
+.scrambler .scrambler-find > div{
+  display: inline-block;
+}
+.scrambler .scrambler-timer{
+  text-align: center;
+  color: green;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+.scrambler .scrambler-codes {
+  display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  margin: auto;
+}
+.scrambler .scrambler-codes > div{
+  flex: 1 0 10%;
+  margin: 7px 0;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+}
+.scrambler .scrambler-codes > div.red{
+  color: red;
+}
+.scrambler .scrambler-codes > div.green{
+  color: green;
+}
+.scrambler .scrambler-mirrored .scrambler-find > div,
+.scrambler .scrambler-mirrored .scrambler-codes > div {
+  -moz-transform: scale(-1, -1);
+  -o-transform: scale(-1, -1);
+  -webkit-transform: scale(-1, -1);
+  transform: scale(-1, -1);
+}
+
+#showImage {
+  padding: 10px;
+  position: absolute;
+  top: 47%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 45px;
+  text-align: center;
+}
+
+#showImage .btn {
+  position: absolute;
+  top: 5%;
+  right: 0px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #3C3C3C;
+  color: #00FFBF;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button {
+  background-color: white;
+  padding: 12px;
+}
+
+.contain {
+  object-fit: contain;
+}
