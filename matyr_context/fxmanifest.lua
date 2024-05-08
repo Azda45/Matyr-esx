@@ -11,5 +11,5 @@ files{
 
 client_script "client.lua"
 exports{
-    'openmenu'
+    'context'
 }

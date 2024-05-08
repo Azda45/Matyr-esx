@@ -252,7 +252,7 @@ function ResetScramblerTimer(){
 
 
 window.addEventListener('message', (event) => {
-    if (event.data.action === 'scrambler-start') {
+    if (event.data.action === 'hackingdevice') {
         game_time = event.data.time
         game_type = event.data.type
         game_mirrored = event.data.mirrored

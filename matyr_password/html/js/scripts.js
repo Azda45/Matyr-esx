@@ -94,7 +94,7 @@ function reset(){
 
 window.addEventListener('message', function(event) {
     var event = event.data;
-    if (event.type == 'numbers') {
+    if (event.type == 'password') {
         if (!event.length || !event.timer || !event.showTime) {
             StartNumbersGame(5, 5, 3); // Start with some defaults just in case, this will most likely never occur, unless changes are made to the code.
         } else {

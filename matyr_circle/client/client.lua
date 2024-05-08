@@ -5,7 +5,7 @@ function circle(circles, seconds, callback)
     Result = nil
     NUI_status = true
     SendNUIMessage({
-        action = 'start',
+        action = 'circle',
         value = circles,
         time = seconds,
     })

@@ -16,7 +16,7 @@ function hackingdevice(callback, type, time, mirrored)
         Callbackk = callback
         open = true
         SendNUIMessage({
-            action = "scrambler-start",
+            action = "hackingdevice",
             type = type,
             time = time,
             mirrored = mirrored,

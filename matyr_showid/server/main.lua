@@ -1,9 +1,15 @@
 onlinePlayers = {}
+ESX = exports["es_extended"]:getSharedObject()
 
-RegisterServerEvent('matyr_showid:add-id')
-AddEventHandler('matyr_showid:add-id', function()
-    TriggerClientEvent("matyr_showid:client:add-id", source, onlinePlayers)
-    TriggerClientEvent("matyr_showid:client:add-id", -1,  tostring(source))
+
+RegisterServerEvent('tgiann-showid:add-id')
+AddEventHandler('tgiann-showid:add-id', function()
+    xPlayer = ESX.GetPlayerFromId(source)
+    TriggerClientEvent("tgiann-showid:client:add-id", source, onlinePlayers)
+    local topText = ''
+
+    onlinePlayers[tostring(source)] = topText
+    TriggerClientEvent("tgiann-showid:client:add-id", -1, topText, tostring(source))
 end)
 
 AddEventHandler('playerDropped', function(reason)

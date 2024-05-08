@@ -59,7 +59,7 @@ const app = Vue.createApp({
     },
     methods: {
         // NUI Requests
-        BEGIN_MINIGAME(data) {
+        color(data) {
             this.numberOfIcons = data.icons ? data.icons : 4;
             this.timeToGuess = data.time ? data.time : 4000;
             this.setPlayableIcons();

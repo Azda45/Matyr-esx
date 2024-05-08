@@ -16,7 +16,7 @@ end)
 function hacking(cb, dif, timer)
     p = promise.new()
     SendNUIMessage({
-        action = 'open',
+        action = 'ddr',
         difficulty = dif,
         timer = timer,
     })

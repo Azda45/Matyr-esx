@@ -306,7 +306,7 @@ function resetTimer(){
 }
 
 window.addEventListener('message', (event) => {
-    if (event.data.action === 'open') {
+    if (event.data.action === 'untangle') {
         amountOfDots = 7
         if (event.data.dots != null) {
             amountOfDots = event.data.dots

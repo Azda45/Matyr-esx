@@ -1,3 +1,5 @@
+local notify= exports['matyr_notify']
+local context = exports['matyr_context']
 loadModel = function(model)
     while not HasModelLoaded(model) do
         Wait(0)
@@ -16,11 +18,7 @@ end
 hasBoomBox = function(radio)
     local equipRadio = true
     CreateThread(function()
-        lib.notify({
-            title = 'Instructions',
-            description = 'Press E to drop boombox',
-            type = 'inform'
-        })
+        notify:DoHudText('inform', 'Press E to drop boombox')
         while equipRadio do
             Wait(0)
             if IsControlJustReleased(0, 38) then
@@ -63,7 +61,7 @@ boomboxPlaced = function(obj)
 
                     },
                     job = 'all',
-                    distance = 1.5
+                    distance = 2
                 })
                 targetPlaced = true
             elseif not DoesEntityExist(obj) then
@@ -89,126 +87,58 @@ interactBoombox = function(radio, radioCoords)
     end
     TriggerServerEvent('azda_boombox:syncActive', activeRadios)
     if not activeRadios[radio].data.playing then
-        lib.registerContext({
-            id = 'boomboxFirst',
-            title = 'Boombox',
-            options = {
-                {
-                    title = 'Play Music',
-                    description = 'Play Music On Speaker',
-                    arrow = true,
-                    event = 'azda_boombox:playMenu',
-                    args = { type = 'play', id = radio }
-                },
-                {
-                    title = 'Saved Songs',
-                    description = 'Songs you previously saved',
-                    arrow = true,
-                    event = 'azda_boombox:savedSongs',
-                    args = { id = radio }
-                }
-            }
-        })
-        lib.showContext('boomboxFirst')
-    else
-        lib.registerContext({
-            id = 'boomboxSecond',
-            title = 'Boombox',
-            options = {
-                {
-                    title = 'Change Music',
-                    description = 'Change music on speaker',
-                    arrow = true,
-                    event = 'azda_boombox:playMenu',
-                    args = { type = 'play', id = radio }
-                },
-                {
-                    title = 'Saved Songs',
-                    description = 'Songs you previously saved',
-                    arrow = true,
-                    event = 'azda_boombox:savedSongs',
-                    args = { id = radio }
-                },
-                {
-                    title = 'Stop Music',
-                    description = 'Stop music on speaker',
-                    arrow = false,
-                    event = 'azda_boombox:playMenu',
-                    args = { type = 'stop', id = radio }
-                },
-                {
-                    title = 'Adjust Volume',
-                    description = 'Change volume on speaker',
-                    arrow = false,
-                    event = 'azda_boombox:playMenu',
-                    args = { type = 'volume', id = radio }
-                },
-                {
-                    title = 'Change Distance',
-                    description = 'Change distance on speaker',
-                    arrow = false,
-                    event = 'azda_boombox:playMenu',
-                    args = { type = 'distance', id = radio }
-                }
-            }
-        })
-        lib.showContext('boomboxSecond')
-    end
-end
-
-selectSavedSong = function(data)
-    lib.registerContext({
-        id = 'selectSavedSong',
-        title = 'Manage Song',
-        options = {
+        context:context {
             {
-                title = 'Play Song',
-                description = 'Play this song',
-                arrow = false,
-                event = 'azda_boombox:playSavedSong',
-                args = data
+                id = 1,
+                header = "Boombox",
+                txt = ""
             },
             {
-                title = 'Delete Song',
-                description = 'Delete this song',
-                arrow = true,
-                event = 'azda_boombox:deleteSong',
-                args = data
-            }
+                id = 2,
+                header = "Play Music",
+                txt = "Play Music On Speaker",
+                params = {
+                    event = 'azda_boombox:playMenu',
+                    args = { type = 'play', id = radio }
+                },
+            },
         }
-    })
-    lib.showContext('selectSavedSong')
-end
-
-savedSongsMenu = function(radio)
-    ESX.TriggerServerCallback('azda_boombox:getSavedSongs', function(cb)
-        local radio = radio.id
-        local Options = {
+    else
+        context:context {
             {
-                title = 'Save A Song',
-                description = 'Save a song to play later',
-                arrow = true,
-                event = 'azda_boombox:saveSong',
-                args = { id = radio }
+                id = 1,
+                header = "Boombox",
+                txt = ""
+            },
+            {
+                id = 2,
+                header = 'Change Music',
+                txt = 'Change music on speaker',
+                params = {
+                    event = 'azda_boombox:playMenu',
+                    args = { type = 'play', id = radio }
+                }
+
+            },
+            {
+                id = 3,
+                header = 'Stop Music',
+                txt = 'Stop music on speaker',
+                params = {
+                    event = 'azda_boombox:playMenu',
+                    args = { type = 'stop', id = radio }
+                }
+            },
+            {
+                id = 4,
+                header = 'Adjust Volume',
+                txt = 'Change volume on speaker',
+                params = {
+                    event = 'azda_boombox:playMenu',
+                    args = { type = 'volume', id = radio }
+                }
+
             }
         }
-        if cb then
-            for i = 1, #cb do
-                print(radio)
-                table.insert(Options, {
-                    title = cb[i].label,
-                    description = '',
-                    arrow = true,
-                    event = 'azda_boombox:selectSavedSong',
-                    args = { id = radio, link = cb[i].link, label = cb[i].label }
-                })
-            end
-        end
-        lib.registerContext({
-            id = 'boomboxSaved',
-            title = 'Boombox',
-            options = Options
-        })
-        lib.showContext('boomboxSaved')
-    end)
+    end
 end

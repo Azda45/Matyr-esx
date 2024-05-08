@@ -16,7 +16,7 @@ $('document').ready(function() {
                 $(".progress-container").fadeOut('fast', function() {
                     $('#progress-bar').removeClass('cancellable');
                     $("#progress-bar").css("width", 0);
-                    $.post('https://'+ GetParentResourceName() +'/FinishAction', JSON.stringify({
+                    $.post(`https://${GetParentResourceName()}/FinishAction`, JSON.stringify({
                         })
                     );
                 })
@@ -33,7 +33,7 @@ $('document').ready(function() {
         cancelledTimer = setTimeout(function () {
             $(".progress-container").fadeOut('fast', function() {
                 $("#progress-bar").css("width", 0);
-                $.post('https://' + GetParentResourceName() +'/CancelAction', JSON.stringify({
+                $.post(`https://${GetParentResourceName()}/CancelAction`, JSON.stringify({
                     })
                 );
             });

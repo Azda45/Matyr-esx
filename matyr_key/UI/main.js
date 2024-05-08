@@ -74,7 +74,7 @@ function SubmitData() {
 
 
 const PostData = (data) => {
-    return $.post(`https://matyr_key/dataPost`, JSON.stringify(data))
+    return $.post(`http://matyr_key/dataPost`, JSON.stringify(data))
 }
 
 const CancelMenu = () => {
@@ -82,7 +82,7 @@ const CancelMenu = () => {
         var id = RowsData[i].id
         $(Rows[id]).remove();
     }
-    $.post(`https://matyr_key/cancel`)
+    $.post(`http://matyr_key/cancel`)
     return CloseMenu();
 }
 

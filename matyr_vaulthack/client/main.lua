@@ -24,7 +24,7 @@ end)
 function vaultcl(puzzleDuration, puzzleLength, puzzleAmount)
     SetNuiFocus(true, true)
     SendNUIMessage({
-        action = "open",
+        action = "vault",
         duration = puzzleDuration,
         length = puzzleLength,
         amount = puzzleAmount

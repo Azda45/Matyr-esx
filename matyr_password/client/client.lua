@@ -2,7 +2,7 @@ local Failed = false
 local Success = false
 
 function password(numbersLength, timer, showTime)
-    SendNUIMessage({ type = "numbers", length = numbersLength, timer = timer, showTime = showTime })
+    SendNUIMessage({ type = "password", length = numbersLength, timer = timer, showTime = showTime })
     SetNuiFocus(true, true)
 
     while not Failed and not Success do

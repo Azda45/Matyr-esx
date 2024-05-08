@@ -1,0 +1,21 @@
+body {
+  margin: auto;
+}
+
+@font-face {
+  font-family: 'EAS_TITLE';
+  src: url('fonts/VCR_OSD_MONO.ttf');
+}
+
+.eas {
+  position: relative;
+  margin-top: 150px;
+  font-family: 'EAS_TITLE';
+  text-align: center;
+  font-size: 120%;
+  color: #e8e8e8;
+  border-radius: 100px 100px 100px 100px;
+  background: #ff5a57da;
+  width: 800px;
+  left: 20%;
+}

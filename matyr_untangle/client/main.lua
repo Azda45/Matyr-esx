@@ -19,7 +19,7 @@ function untangle(cb, dots, time)
     p = promise.new()
     SetNuiFocus(true, true)
     SendNUIMessage({
-        action = 'open',
+        action = 'untangle',
         dots = dots,
         time = time
     })

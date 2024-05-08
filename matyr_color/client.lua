@@ -7,7 +7,7 @@ function color(icons, time)
 
     MinigameActive = true
     SetNuiFocus(true, true)
-    SendNUIMessage({ res = 'BEGIN_MINIGAME', icons = icons, time = time*1000 })
+    SendNUIMessage({ res = 'color', icons = icons, time = time*1000 })
 
     while MinigameActive do
         Citizen.Wait(100)

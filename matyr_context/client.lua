@@ -9,11 +9,11 @@ RegisterNUICallback("cancel", function()
 end)
 
 
-function openmenu(data)
+function context(data)
     if not data then return end
     SetNuiFocus(true, true)
     SendNUIMessage({
-        action = "OPEN_MENU",
+        action = "context",
         data = data
     })
 end

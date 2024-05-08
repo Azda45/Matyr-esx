@@ -80,7 +80,7 @@ gtag('config', 'G-7E64QM2WXT');
 
 
 window.addEventListener('message', function(event){
-    if (event.data.action == "open") {
+    if (event.data.action == "vault") {
         start(event.data.duration, event.data.length,event.data.amount)
         $(".bg").classList.remove('hidden');
     }

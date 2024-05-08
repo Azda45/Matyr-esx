@@ -204,7 +204,7 @@ function resetTimer(){
 }
 
 window.addEventListener('message', (event) => {
-    if (event.data.action === 'open') {
+    if (event.data.action === 'ddr') {
         if(event.data.difficulty === 'easy') {
             difficulty = ["asd", 2000, 1000, 'easy'];
         }   

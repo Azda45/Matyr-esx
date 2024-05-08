@@ -7,95 +7,95 @@ window.activateClicking = false;
 
 ThermiteNew = {}
 
-$(document).ready(function(){
-    $(".container").hide()
+$(document).ready(function () {
+  $(".container").hide()
 })
 
-$(document).ready(function(){
-ThermiteNew.Start = function(data) {
+$(document).ready(function () {
+  ThermiteNew.thermite = function (data) {
 
     $(".container").show()
     $(".grid").removeClass("won");
 
     $(".grid").removeClass("won");
-    $(".grid").removeClass("lost");
+    $(".grid").removeClass("lost")
     hideAllBlocks();
     window.maxIncorrectBlocksNum = data.incorrect;
     window.correctBlocksNum = data.correct;
-    window.timeBlocksShows = data.showtime; 
-    window.timeUntilLose = data.losetime; 
+    window.timeBlocksShows = data.showtime;
+    window.timeUntilLose = data.losetime;
     window.gridCorrectBlocks = generateRandomNumberBetween(1, 36, data.correct);
     window.activateClicking = false;
     showCorrectBlocks();
-    setTimeout(()=>{
-    hideAllBlocks();
-    window.activateClicking = true;
-    }, timeBlocksShows*1000);
-    setTimeout(()=>{
-        isGameForeited();
-    }, timeUntilLose*1000);
-}
+    setTimeout(() => {
+      hideAllBlocks();
+      window.activateClicking = true;
+    }, timeBlocksShows * 1000);
+    setTimeout(() => {
+      isGameForeited();
+    }, timeUntilLose * 1000);
+  }
 
 
-window.addEventListener('message', function(event){
-var action = event.data.action;
-switch(action) {
-    case "Start":
-        ThermiteNew.Start(event.data);
+  window.addEventListener('message', function (event) {
+    var action = event.data.action;
+    switch (action) {
+      case "thermite":
+        ThermiteNew.thermite(event.data);
         break;
     }
-});
+  });
 })
 
 $(document.body).on("click", ".block", onBlockClick);
 
-function generateRandomNumberBetween(min=1,max=window.allBlocksNum,length = window.correctBlocksNum){
+function generateRandomNumberBetween(min = 1, max = window.allBlocksNum, length = window.correctBlocksNum) {
   var arr = [];
-  while(arr.length < length){
-      var r = Math.floor(Math.random() * (max+1-min)) + min;
-      if(arr.indexOf(r) === -1) arr.push(r);
+  while (arr.length < length) {
+    var r = Math.floor(Math.random() * (max + 1 - min)) + min;
+    if (arr.indexOf(r) === -1) arr.push(r);
   }
   return arr;
 }
 
-function onBlockClick(e){
-  if(!activateClicking){
+function onBlockClick(e) {
+  if (!activateClicking) {
     return;
   }
-  
+
   let clickedBlock = e.target;
-  
+
   let blockNum = clickedBlock.classList.value.match(/(?:block-)(\d+)/)[1];
   blockNum = Number(blockNum);
   let correctBlocks = window.gridCorrectBlocks;
 
   let correct = correctBlocks.indexOf(blockNum) !== -1;
   clickedBlock.classList.add("clicked");
-  if(correct){
+  if (correct) {
     clickedBlock.classList.remove("incorrect");
     clickedBlock.classList.add("correct");
   }
-  else{
+  else {
     clickedBlock.classList.add("incorrect");
     clickedBlock.classList.remove("correct");
   }
-checkWinOrLost();
+  checkWinOrLost();
 }
 
-function showCorrectBlocks(){
-  
-  $(".block").each((i,ele)=>{
+function showCorrectBlocks() {
+
+  $(".block").each((i, ele) => {
     let blockNum = ele.classList.value.match(/(?:block-)(\d+)/)[1];
     blockNum = Number(blockNum);
     let correctBlocks = window.gridCorrectBlocks;
     let correct = correctBlocks.indexOf(blockNum) !== -1;
-    if(correct){
+    if (correct) {
       ele.classList.add("show");
     }
   });
 }
-function hideAllBlocks(){
-  $(".block").each((i,ele)=>{
+function hideAllBlocks() {
+  $(".block").each((i, ele) => {
     ele.classList.remove("show");
     ele.classList.remove("correct");
     ele.classList.remove("incorrect");
@@ -105,38 +105,38 @@ function hideAllBlocks(){
 
 function checkWinOrLost() {
   if (isGameWon()) {
-      hideAllBlocks();
-      window.activateClicking = false;
-      $(".container").hide();
-      $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
-          success: true
-      }));
+    hideAllBlocks();
+    window.activateClicking = false;
+    $(".container").hide();
+    $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
+      success: true
+    }));
   }
   if (isGameLost()) {
-      hideAllBlocks();
-      $(".container").hide();
-      window.activateClicking = false;
-      $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
-          success: false
-      }));
+    hideAllBlocks();
+    $(".container").hide();
+    window.activateClicking = false;
+    $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
+      success: false
+    }));
   }
 }
 
 
-function isGameWon(){
+function isGameWon() {
   return $(".correct").length >= (window.correctBlocksNum);
 }
-function isGameLost(){
+function isGameLost() {
   return $(".incorrect").length >= window.maxIncorrectBlocksNum;
 };
 
 function isGameForeited() {
-    if (window.activateClicking) {
-        hideAllBlocks();
-        $(".container").hide();
-        window.activateClicking = false;
-        $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
-            success: false
-        }));
-    }       
+  if (window.activateClicking) {
+    hideAllBlocks();
+    $(".container").hide();
+    window.activateClicking = false;
+    $.post('http://' + GetParentResourceName() + '/ThermiteResult', JSON.stringify({
+      success: false
+    }));
+  }
 }

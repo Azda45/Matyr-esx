@@ -14,6 +14,10 @@ RegisterNetEvent("matyr_notify:DoLongHudText")
 AddEventHandler("matyr_notify:DoLongHudText", function(data)
 	DoLongHudText(data.type, data.text)
 end)
+RegisterNetEvent("matyr_notify:DoCustomHudText")
+AddEventHandler("matyr_notify:DoCustomHudText", function(data)
+    DoCustomHudText(data.type, data.text, data.duration)
+end)
 function DoShortHudText(type, text)
 	SendNUIMessage({
 		action = 'shortnotif',
@@ -36,4 +40,14 @@ function DoLongHudText(type, text)
 		type = type,
 		text = text
 	})
+end
+
+
+function DoCustomHudText(type, text, duration)
+    SendNUIMessage({
+        action = 'customnotif',
+        type = type,
+        text = text,
+        duration = duration
+    })
 end

@@ -140,7 +140,7 @@ function endGame(status) {
 }
 
 window.addEventListener("message", (event) => {
-    if (event.data.action == "start") {
+    if (event.data.action == "circle") {
         if (event.data.value != null) {
             needed = event.data.value
         } else {

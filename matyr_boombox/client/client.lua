@@ -1,11 +1,6 @@
 xSound = exports.xsound
 activeRadios = {}
-Framework = nil
-
-Framework = 'ESX'
-ESX = exports['es_extended']:getSharedObject()
-
-
+local key = exports['matyr_key']
 RegisterNetEvent('azda_boombox:useBoombox')
 AddEventHandler('azda_boombox:useBoombox', function()
     local ped = PlayerPedId()
@@ -82,70 +77,28 @@ AddEventHandler('azda_boombox:interact', function()
     interactBoombox(radio, radioCoords)
 end)
 
-AddEventHandler('azda_boombox:savedSongs', function(radio)
-    savedSongsMenu(radio)
-end)
-
-AddEventHandler('azda_boombox:saveSong', function()
-    local input = lib.inputDialog('Save Song', { 'Name', 'Youtube Link' })
-    if input[1] and input[2] then
-        TriggerServerEvent('azda_boombox:save', input[1], input[2])
-        lib.notify({
-            title = 'Success',
-            description = 'Song Saved',
-            type = 'success'
-        })
-    else
-        lib.notify({
-            title = 'Incorrect',
-            description = 'You entered incomplete information',
-            type = 'error'
-        })
-    end
-end)
-
-AddEventHandler('azda_boombox:selectSavedSong', function(data)
-    selectSavedSong(data)
-end)
-
-AddEventHandler('azda_boombox:playSavedSong', function(data)
-    local musicId = 'id_' .. data.id
-    TriggerServerEvent("azda_boombox:soundStatus", "play", musicId,
-        { position = activeRadios[data.id].pos, link = data.link, volume = '0.2', distance = 25 })
-    activeRadios[data.id].data = { playing = true, currentId = 'id_' .. PlayerId() }
-    TriggerServerEvent('azda_boombox:syncActive', activeRadios)
-end)
-
-AddEventHandler('azda_boombox:deleteSong', function(data)
-    local confirmed = lib.alertDialog({
-        header = 'Delete Song',
-        content = 'Are you sure you wish to delete song?',
-        centered = true,
-        cancel = true
-    })
-    if confirmed == 'confirm' then
-        TriggerServerEvent('azda_boombox:deleteSong', data)
-        lib.notify({
-            title = 'Deleted',
-            description = 'Song deleted',
-            type = 'success'
-        })
-    else
-        lib.notify({
-            title = 'Cancelled',
-            description = 'You have cancelled your previous action',
-            type = 'error'
-        })
-    end
-end)
-
 AddEventHandler('azda_boombox:playMenu', function(data)
     local musicId = 'id_' .. data.id
     if data.type == 'play' then
-        local keyboard = lib.inputDialog('Play Music', { 'Youtube URL', 'Distance (Max 40)', 'Volume (1-100)' })
-        if keyboard and keyboard[1] and tonumber(keyboard[2]) and tonumber(keyboard[2]) <= 40 and tonumber(keyboard[3]) and tonumber(keyboard[3]) <= 100 then
-            TriggerServerEvent("azda_boombox:soundStatus", "play", musicId,
-                { position = activeRadios[data.id].pos, link = keyboard[1], volume = keyboard[3] / 100, distance = keyboard[2] })
+        local keyboard = key:key({
+            header = "Play Music", 
+            rows = {
+                {
+                    id = 1, 
+                    txt = "Youtube URL"
+                },
+                {
+                    id = 2, 
+                    txt = "Distance (Max 40)"
+                },{
+                    id = 3, 
+                    txt = "Volume (1-100)"
+                },
+            }
+        })
+        if keyboard ~= nil then
+            if keyboard[1].input == nil or keyboard[2].input == nil or keyboard[3].input == nil then return end
+            TriggerServerEvent("azda_boombox:soundStatus", "play", musicId,{ position = activeRadios[data.id].pos, link = keyboard[1].input, volume = keyboard[3].input / 100, distance = keyboard[2].input })
             activeRadios[data.id].data = { playing = true, currentId = 'id_' .. PlayerId() }
             TriggerServerEvent('azda_boombox:syncActive', activeRadios)
         end
@@ -154,14 +107,18 @@ AddEventHandler('azda_boombox:playMenu', function(data)
         activeRadios[data.id].data = { playing = false }
         TriggerServerEvent('azda_boombox:syncActive', activeRadios)
     elseif data.type == 'volume' then
-        local keyboard = lib.inputDialog('Change Volume', { 'Volume (1-100)' })
-        if keyboard and tonumber(keyboard[1]) and tonumber(keyboard[1]) <= 100 then
-            TriggerServerEvent("azda_boombox:soundStatus", "volume", musicId, { volume = keyboard[1] / 100 })
-        end
-    elseif data.type == 'distance' then
-        local keyboard = lib.inputDialog('Change Distance', { 'Distance (Max 40)' })
-        if keyboard and tonumber(keyboard[1]) and tonumber(keyboard[1]) <= 40 then
-            TriggerServerEvent("azda_boombox:soundStatus", "distance", musicId, { distance = keyboard[1] })
+        local keyboard =key:key({
+            header = "Change Volume", 
+            rows = {
+                {
+                    id = 1, 
+                    txt = "Volume (1-100)"
+                }
+            }
+        })
+        if keyboard ~= nil then
+            if keyboard[1].input == nil then return end
+            TriggerServerEvent("azda_boombox:soundStatus", "volume", musicId, { volume = keyboard[1].input / 100 })
         end
     end
 end)

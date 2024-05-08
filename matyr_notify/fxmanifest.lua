@@ -6,9 +6,7 @@ ui_page {
 }
 
 files {
-	'html/ui.html',
-	'html/js/app.js', 
-	'html/css/style.css',
+	'html/*.*'
 }
 
 client_scripts {

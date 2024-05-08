@@ -62,7 +62,7 @@ window.addEventListener("message", (evt) => {
     const info = data.data
     const action = data.action
     switch (action) {
-        case "OPEN_MENU":
+        case "context":
             return OpenMenu(info);
         case "CLOSE_MENU":
             return CloseMenu();

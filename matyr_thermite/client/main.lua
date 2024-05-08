@@ -20,7 +20,7 @@ exports('thermiteminigame', function(correctBlocks, incorrectBlocks, timetoShow,
     failCb = fail
     SetNuiFocus(true, true)
     SendNUIMessage({
-        action = "Start",
+        action = "thermite",
         correct = correctBlocks,
         incorrect = incorrectBlocks,
         showtime = timetoShow,
