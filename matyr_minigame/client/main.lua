@@ -1,4 +1,3 @@
-ESX = exports["es_extended"]:getSharedObject()
 local key = exports["matyr_key"]
 local notify = exports['matyr_notify']
 local circle = exports['matyr_circle']
@@ -14,7 +13,7 @@ local vault = exports['matyr_vaulthack']
 
 -- circle
 RegisterNetEvent('circle', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Circle Setting",
         rows = {
             {
@@ -31,16 +30,16 @@ RegisterNetEvent('circle', function()
         if keyboard[1].input == nil or keyboard[2].input == nil then return end
         local success = circle:circle(keyboard[1].input, keyboard[2].input)
         if success then
-            notify:DoHudText('success', 'You successfully complete CIRCLE minigame')
+            notify:notify('success', 'You successfully complete CIRCLE minigame')
         else
-            notify:DoHudText('error', 'You fail to complete CIRCLE minigame')
+            notify:notify('error', 'You fail to complete CIRCLE minigame')
         end
     end
 end)
 
 -- color
 RegisterNetEvent('color', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Color Setting",
         rows = {
             {
@@ -57,16 +56,16 @@ RegisterNetEvent('color', function()
         if keyboard[1].input == nil or keyboard[2].input == nil then return end
         local success = color:color(keyboard[1].input, keyboard[2].input)
         if success then
-            notify:DoHudText('success', 'You successfully complete COLOR minigame')
+            notify:notify('success', 'You successfully complete COLOR minigame')
         else
-            notify:DoHudText('error', 'You fail to complete COLOR minigame')
+            notify:notify('error', 'You fail to complete COLOR minigame')
         end
     end
 end)
 
 -- ddr
 RegisterNetEvent('ddr', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Ddr Setting",
         rows = {
             {
@@ -84,9 +83,9 @@ RegisterNetEvent('ddr', function()
         if keyboard[1].input == nil or keyboard[2].input == nil then return end
         ddr:hacking(function(success)
             if success then
-                notify:DoHudText('success', 'You successfully complete DDR minigame')
+                notify:notify('success', 'You successfully complete DDR minigame')
             else
-                notify:DoHudText('error', 'You fail to complete DDR minigame')
+                notify:notify('error', 'You fail to complete DDR minigame')
             end
         end, keyboard[1].input, keyboard[2].input)
     end
@@ -94,7 +93,7 @@ end)
 
 -- hackingdevice
 RegisterNetEvent('hackingdevice', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Device Setting",
         rows = {
             {
@@ -108,9 +107,9 @@ RegisterNetEvent('hackingdevice', function()
         if keyboard[1].input == nil then return end
         hackingdevice:hackingdevice(function(success)
             if success then
-                notify:DoHudText('success', 'You successfully complete HACKINGDEVICE minigame')
+                notify:notify('success', 'You successfully complete HACKINGDEVICE minigame')
             else
-                notify:DoHudText('error', 'You fail to complete HACKINGDEVICE    minigame')
+                notify:notify('error', 'You fail to complete HACKINGDEVICE    minigame')
             end
         end, "numeric", keyboard[1].input, 0)
     end
@@ -121,9 +120,9 @@ RegisterNetEvent('lightsout', function()
     local result = lightsout:lightsout(4, 20)
 
     if result then
-        notify:DoHudText('success', 'You successfully complete LIGHTSOUT minigame')
+        notify:notify('success', 'You successfully complete LIGHTSOUT minigame')
     else
-        notify:DoHudText('error', 'You fail to complete LIGHTSOUT minigame')
+        notify:notify('error', 'You fail to complete LIGHTSOUT minigame')
     end
 end)
 
@@ -131,15 +130,15 @@ end)
 RegisterNetEvent('lockpick', function()
     local success = lockpick:startLockpick()
     if success then
-        notify:DoHudText('success', 'You successfully completed the LOCKPICK minigame.')
+        notify:notify('success', 'You successfully completed the LOCKPICK minigame.')
     else
-        notify:DoHudText('error', 'You failed to complete the LOCKPICK minigame.')
+        notify:notify('error', 'You failed to complete the LOCKPICK minigame.')
     end
 end)
 
 -- password
 RegisterNetEvent('password', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Password Setting",
         rows = {
             {
@@ -162,16 +161,16 @@ RegisterNetEvent('password', function()
             keyboard[3].input)
 
         if result then
-            notify:DoHudText('success', 'You successfully complete PASSWORD minigame')
+            notify:notify('success', 'You successfully complete PASSWORD minigame')
         else
-            notify:DoHudText('error', 'You fail to complete PASSWORD minigame')
+            notify:notify('error', 'You fail to complete PASSWORD minigame')
         end
     end
 end)
 
 -- thermite
 RegisterNetEvent('thermite', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Thermite Setting",
         rows = {
             {
@@ -192,17 +191,17 @@ RegisterNetEvent('thermite', function()
         if keyboard[1].input == nil or keyboard[2].input == nil or keyboard[3].input == nil then return end
         thermite:thermiteminigame(keyboard[1].input, 3, keyboard[2].input, keyboard[3].input,
             function()
-                notify:DoHudText('success', 'You successfully complete THERMITE minigame')
+                notify:notify('success', 'You successfully complete THERMITE minigame')
             end,
             function()
-                notify:DoHudText('error', 'You fail to complete THERMITE minigame')
+                notify:notify('error', 'You fail to complete THERMITE minigame')
             end)
     end
 end)
 
 -- untangle
 RegisterNetEvent('untangle', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Untagle Setting",
         rows = {
             {
@@ -220,9 +219,9 @@ RegisterNetEvent('untangle', function()
         if keyboard[1].input == nil or keyboard[2].input == nil then return end
         untangle:untangle(function(success)
             if success then
-                notify:DoHudText('success', 'You successfully complete UNTANGLE minigame')
+                notify:notify('success', 'You successfully complete UNTANGLE minigame')
             else
-                notify:DoHudText('error', 'You fail to complete UNTANGLE minigame')
+                notify:notify('error', 'You fail to complete UNTANGLE minigame')
             end
         end, keyboard[1].input, keyboard[2].input)
     end
@@ -230,7 +229,7 @@ end)
 
 -- vault
 RegisterNetEvent('vault', function()
-    local keyboard = key:KeyboardInput({
+    local keyboard = key:key({
         header = "Vault Setting",
         rows = {
             {
@@ -248,9 +247,9 @@ RegisterNetEvent('vault', function()
         if keyboard[1].input == nil or keyboard[2].input == nil then return end
         vault:vault(keyboard[1].input, 4, keyboard[2].input, function(success)
             if success then
-                notify:DoHudText('success', 'You successfully complete VAULT minigame')
+                notify:notify('success', 'You successfully complete VAULT minigame')
             else
-                notify:DoHudText('error', 'You fail to complete VAULT minigame')
+                notify:notify('error', 'You fail to complete VAULT minigame')
             end
         end)
     end

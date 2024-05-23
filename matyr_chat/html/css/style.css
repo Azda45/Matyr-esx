@@ -8,7 +8,6 @@
 .color-6{color: #aa66cc;}
 .color-8{color: #cc0000;}
 .color-9{color: #cc0068;}
-    src: url("../BarlowCondensed.ttf");
 
 * {
   font-family: 'Lato', sans-serif;
@@ -144,18 +143,6 @@ textarea:focus, input:focus {
   background-color: rgba(47, 92, 115, 0.85);
 }
 
-.warning {
-  background-color: rgba(255, 136, 0, 0.85);
-}
-
-.normal {
-  background-color: rgba(47, 114, 181, 0.85);
-}
-
-.error {
-  background-color: rgba(191, 36, 36, 0.85);
-}
-
 .chat-message-system {
   display: inline-block !important;
   padding: 0.65vw;
@@ -210,4 +197,15 @@ textarea:focus, input:focus {
   max-width: 100%;
   overflow: hidden;
   word-break: break-word;
+}
+.warning {
+  background-color: rgba(255, 136, 0, 0.85);
+}
+
+.normal {
+  background-color: rgba(47, 114, 181, 0.85);
+}
+
+.error {
+  background-color: rgba(191, 36, 36, 0.85);
 }

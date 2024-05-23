@@ -1,53 +1,27 @@
-RegisterNetEvent("matyr_notify:DoShortHudText")
-AddEventHandler("matyr_notify:DoShortHudText", function(data)
-	DoShortHudText(data.type, data.text)
-end)
-RegisterNetEvent("matyr_notify:DoHudText")
-AddEventHandler("matyr_notify:DoHudText", function(data)
-	DoHudText(data.type, data.text)
-end)
-RegisterNetEvent("matyr_notify:DoLongHudText")
-AddEventHandler("matyr_notify:DoLongHudText", function(data)
-	DoLongHudText(data.type, data.text)
-end)
-RegisterNetEvent("matyr_notify:DoLongHudText")
-AddEventHandler("matyr_notify:DoLongHudText", function(data)
-	DoLongHudText(data.type, data.text)
-end)
-RegisterNetEvent("matyr_notify:DoCustomHudText")
-AddEventHandler("matyr_notify:DoCustomHudText", function(data)
-    DoCustomHudText(data.type, data.text, data.duration)
-end)
-function DoShortHudText(type, text)
-	SendNUIMessage({
-		action = 'shortnotif',
-		type = type,
-		text = text
-	})
-end
+function notify(args)
+    local data = {
+        type = args.type or "inform",
+        text = args.text or "message",
+        duration = type(args.duration) == "number" and args.duration or 3000,
+        sound = args.sound ~= nil and args.sound or false
+    }
 
-function DoHudText(type, text)
-	SendNUIMessage({
-		action = 'notif',
-		type = type,
-		text = text
-	})
-end
-
-function DoLongHudText(type, text)
-	SendNUIMessage({
-		action = 'longnotif',
-		type = type,
-		text = text
-	})
-end
-
-
-function DoCustomHudText(type, text, duration)
+    if not (data.type == "inform" or data.type == "warn" or data.type == "error" or data.type == "success") then
+        data.type = "inform"
+    end
     SendNUIMessage({
-        action = 'customnotif',
-        type = type,
-        text = text,
-        duration = duration
+        action = 'notify',
+        type = data.type,
+        text = data.text,
+        duration = data.duration,
+        playSound = data.sound
+    })
+    SendNUIMessage({
+        action = 'toggleSound',
+        state = state
     })
 end
+
+exports('notify', function(args)
+    notify(args)
+end)

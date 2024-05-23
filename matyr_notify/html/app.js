@@ -1,45 +1,32 @@
-var sound = new Audio('sound.mp3'); // Adjust the path to your audio file accordingly
+var sound = new Audio('sound.mp3');
 sound.volume = 0.8;
+
+var globalPlaySound = true;
 
 window.addEventListener('message', function (event) {
     switch(event.data.action) {
-        case 'shortnotif':
-            displayNotification(event.data, 1000);
+        case 'notify':
+            notify(event.data, event.data.duration, event.data.playSound);
             break;
-        case 'notif':
-            displayNotification(event.data, 2500);
-            break;
-        case 'longnotif':
-            displayNotification(event.data, 5000);
-            break;
-        case 'customnotif':
-            displayCustomNotification(event.data);
+        case 'toggleSound':
+            globalPlaySound = event.data.state;
             break;
         default:
             break;
     }
 });
 
-function displayNotification(data, duration) {
+function notify(data, duration, playSound) {
     var $notification = $('.notification.template').clone();
-    $notification.removeClass('template').addClass(data.type).html(data.text).fadeIn();
+    $notification.removeClass('template').addClass(data.type).html(data.text).slideDown();
     $('.notif-container').append($notification);
-    sound.play();
+    if (playSound !== undefined ? playSound : globalPlaySound) {
+        sound.play();
+    }
     setTimeout(function() {
-        $notification.fadeOut(function() {
+        $notification.slideUp(function() {
             $notification.remove();
         });
     }, duration);
 }
 
-function displayCustomNotification(data) {
-    var $notification = $('.notification.template').clone();
-    $notification.removeClass('template').addClass(data.type).html(data.text).fadeIn();
-    $('.notif-container').append($notification);
-    sound.play();
-    setTimeout(function() {
-        $notification.fadeOut(function() {
-            $notification.remove();
-        });
-    }, data.duration);
-}

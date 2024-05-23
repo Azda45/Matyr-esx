@@ -6,16 +6,9 @@ ui_page {
 }
 
 files {
-	'html/*.*'
+	'html/*.*',
 }
 
 client_scripts {
 	'client/*.lua'
-}
-
-exports {
-	'DoShortHudText',
-	'DoHudText',
-	'DoLongHudText',
-	'DoCustomHudText',
 }

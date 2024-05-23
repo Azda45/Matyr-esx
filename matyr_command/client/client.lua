@@ -11,8 +11,3 @@ RegisterCommand("pol", function(source, args)
         TriggerServerEvent('pol', table.concat(args, " "))
     end
 end)
-
-RegisterCommand("911", function(source, args)
-    TriggerServerEvent('911', table.concat(args, " "))
-end)
-TriggerEvent("chat:addSuggestion", "/911", "text")

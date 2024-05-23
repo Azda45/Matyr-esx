@@ -1,4 +1,4 @@
-local time = 2
+local time = 60
 local AtmModels = { 'prop_fleeca_atm', 'prop_atm_01', 'prop_atm_02', 'prop_atm_03' }
 
 exports.ox_target:addModel(AtmModels, {
@@ -28,8 +28,8 @@ AddEventHandler('robbing-atm', function()
                 controlDisables = {
                     disableMovement = true,
                     disableCarMovement = true,
-                    disableMouse = true,
-                    disableCombat = false,
+                    disableMouse = false,
+                    disableCombat = true,
                 }
             }
             Citizen.Wait(time * 1000)
@@ -40,5 +40,5 @@ AddEventHandler('robbing-atm', function()
             print("fail")
             notify:DoHudText('error', 'You Failed to rob the ATM')
         end
-    end, math.random(8,12), math.random(30,35))
+    end, math.random(8,12), math.random(20,35))
 end)

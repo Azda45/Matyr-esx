@@ -31,17 +31,9 @@ AddEventHandler('pol', function(param)
                     }
                 } }
             }
-            TriggerClientEvent('chatMessage', -1, '^*^7[^1PoliceAnnouncement^7]:^*' .. '^*' .. line .. '^*')
+            TriggerClientEvent('chatMessage', -1, '^*[PoliceAnnouncement]^*' .. '^*', 'error' ,line .. '^*')
             PerformHttpRequest(webhook, function(statusCode, text, headers) end, 'POST', json.encode(embed),
                 { ['Content-Type'] = 'application/json' })
-            -- PerformHttpRequest(webhook2, function(statusCode, text, headers) end, 'POST',
-            --     json.encode({
-            --         name = player,
-            --         message = line,
-            --         Steam_HEX = identifier,
-            --         Time = time
-            --     }),
-            --     { ['Content-Type'] = 'application/json' })
         end
     end
 end)

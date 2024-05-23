@@ -26,7 +26,7 @@ body {
 }
 
 .success {
-    background: rgba(12, 180, 0, 0.512);
+    background-color: rgba(12, 180, 0, 0.512);
     color: #fff;
 }
 
@@ -36,10 +36,10 @@ body {
 }
 
 .error {
-    background: rgb(255, 0, 0, 0.512);
+    background-color: rgb(255, 0, 0, 0.512);
     color: #fff;
 }
 .warn {
-    background: rgba(218, 185, 0, 0.512);
+    background-color: rgba(218, 185, 0, 0.512);
     color: #fff;
 }
